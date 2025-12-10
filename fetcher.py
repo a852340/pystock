@@ -20,6 +20,9 @@ class StockDataFetcher:
             if df is None or df.empty:
                 return None
             
+            if '时间' in df.columns:
+                df['时间'] = pd.to_datetime(df['时间'])
+            
             return df
             
         except Exception as e:
