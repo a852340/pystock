@@ -15,6 +15,10 @@ class ChartRenderer:
             print("暂无数据")
             return
         
+        df = df.copy()
+        if '时间' in df.columns and not pd.api.types.is_datetime64_any_dtype(df['时间']):
+            df['时间'] = pd.to_datetime(df['时间'])
+        
         today_dates = df['时间'].dt.date.unique()
         if len(today_dates) > 0:
             today = today_dates[-1]
